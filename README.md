@@ -17,3 +17,6 @@ OWPT 와 FSO 의 다양한 연구 방식 이해
 - [O] [2025-11-22] LED-Based Optical Wireless Power Transmission for Automatic Tracking and Powering Mobile Object in Real Time (IEEE Access)
 
 ### 👁️ Free Space Optical
+
+### 🤖 Visual Servoing
+- [] [] Visual servo control, Part 1 Basic approaches (IEEE Robotics & Automation Magazine)
