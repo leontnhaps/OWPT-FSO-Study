@@ -14,9 +14,12 @@ OWPT 와 FSO 의 다양한 연구 방식 이해
 ## 🗂 Categories
 
 ### ⚡ Optical Wireless Power Transmission (OWPT)
-- [O] [2025-11-22] LED-Based Optical Wireless Power Transmission for Automatic Tracking and Powering Mobile Object in Real Time (IEEE Access)
+- [O] [2025-11-22] LED-Based Optical Wireless Power Transmission for Automatic Tracking and Powering Mobile Object in Real Time (IEEE Access, 2025)
 
 ### 👁️ Free Space Optical
 
 ### 🤖 Visual Servoing
 - [] [] Visual servo control, Part 1 Basic approaches (IEEE Robotics & Automation Magazine)
+
+### 💻 Computer Vision
+- [] [] RETROSPECTIVE LOCAL ARTEFACTS DETECTION IN DIFFUSION-WEIGHTED IMAGES USING THE RANDOM SAMPLE CONSENSUS (RANSAC) PARADIGM (2012 9th IEEE International Symposium on Biomedical Imaging (ISBI), 2012)
