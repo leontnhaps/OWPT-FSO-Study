@@ -22,4 +22,4 @@ OWPT 와 FSO 의 다양한 연구 방식 이해
 - [] [] Visual servo control, Part 1 Basic approaches (IEEE Robotics & Automation Magazine)
 
 ### 💻 Computer Vision
-- [] [] RETROSPECTIVE LOCAL ARTEFACTS DETECTION IN DIFFUSION-WEIGHTED IMAGES USING THE RANDOM SAMPLE CONSENSUS (RANSAC) PARADIGM (2012 9th IEEE International Symposium on Biomedical Imaging (ISBI), 2012)
+- [] [] Simple Online and Realtime Tracking with a Deep Association Metric (2016 IEEE International Conference on Image Processing (ICIP), 2016)
