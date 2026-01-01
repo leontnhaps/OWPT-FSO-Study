@@ -1,105 +1,97 @@
-# 📑 LED-Based Optical Wireless Power Transmission for Automatic Tracking and Powering Mobile Object in Real Time Review
+# 📑 Simple Online and Realtime Tracking (SORT)
 
-
-> **Paper Title:** LED-Based Optical Wireless Power Transmission for Automatic Tracking and Powering Mobile Object in Real Time
-> **Authors:** Mingzhi Zhao, Tomoyuki Miyamoto
-> **Journal:** IEEE Access (2025)
-> **Keywords:** `#Wireless power transmission', '#wireless energy', '#optical engineering', '#optical design', '#beam steering', '#image recognition', '#control systems', '#Internet of Things'
+> **Paper Title:** Simple Online and Realtime Tracking
+> **Authors:** Alex Bewley, Zongyuan Ge, Lionel Ott, Fabio Ramos, Ben Upcroft
+> **Conference:** ICIP (2016)
+> **Keywords:** `#Computer Vision`, `#Multiple Object Tracking`, `#Detection`, `#Data Association`
 
 ---
 
 ## 1. 📑 Abstract
-* 동적인 RX 에서 Machine Vision 과 예측 제어 알고리즘을 통해 안정적인 전력 공급을 보장하는 LED를 활용하는 OWPT 시스템.
-* 2축 Beam-steering 메커니즘 결합.
-* 결과적으로 1m 거리에서 40cm² GaAs(갈륨비소) Solar Cell 로 부터 최대 0.8W 출력 입증.
-* 4m 범위내에서 30cm/s 로 움직이는 RX까지 작동 확인.
+* MOT(다중객체추적)의 실용적인 접근방식 탐구.
+* **검출 품질**이 추적 성능에 영향을 미치는 핵심요소임을 확인, 검출기 변경만으로 추적성능 **18.9% 향상** 확인.
+* 칼만 필터와 헝가리안 알고리즘의 조합만으로 online trackers SOTA 알고리즘들과 견줄 수 있음.
+* 단순성으로 인해 **260Hz** 속도로 업데이트 가능하며, 이는 기존 방식보다 20배 이상 빠름.
 
 ---
 
 ## 2. 🚀 Introduction
-* **OWPT의 장점:** Long-range capabilities, high directionality, no electromagnetic interference 등의 장점이 있음.
-    > 💡 **Note:** RF 방식의 WPT 보다 OWPT 가 장점이 있다는 내용.
-
-* **LED vs Laser:** 2가지 방식으로 나뉘어 지는데 대부분은 Laser sources 를 사용함. 하지만 위험성과 Lambert's cosine law 로 인하여 더 넓은 발산각을 가지기에 LED 에서 우수함이 있음.
-    > 💡 **Note:** 레이저에서는 어차피 장거리 전송효율과 직진성 으로 안전문제만 해결하면 레이저가 더 우수함.
-
-* **Tracking의 필요성:** 송신기와 움직이는 수신기 사이의 지속적인 정렬 보장이 안정적인 전력 공급에 매우 중요, 타겟의 위치 변화에 맞춰 조정하는 실시간 자동추적 기능이 있는 OWPT 가 요구됨. 현재의 OWPT는 주로 정지해있거나 움직이지 않는 응용분야에 집중되어있음.
-
----
-
-## 3. ⚙️ AUTO-OWPT System Design (시스템 모델)
-
-### A. Optical System Design
-* RX는 효율을 극대화 하기위해 GaAS Solar cell 로 채택, LED-array collimation scheme 제안.
-* LED, Lens1, Lens2 로 구성되어있고, Lens 1은 퍼지는 빛을 평행광으로 변환해주는 역할.
-* Lens 2는 퍼진 평행광을 Rx 로 모아주는 역할.
-* 이 시스템을 통해 조사 면적을 작게 유지하면서 고출력을 가능하게함.
-    > 💡 **Note:** 나의 경우에는 LED 가 아닌 Laser를 쓰기에 이미 합쳐진 System 이라 생각해도 될거같음, LED 를 통해 어떻게 Laser 처럼 고출력을 할지 렌즈로 설계한거같음.
-
-### B. Beam Aiming System Design
-* 2축의 회전을 조절하는 stepping motor 사용(본 논문에선 M1, M2 모터).
-* 보통 beam aiming 에서는 빠른 응답속도를 가진 Galvano mirror 를 쓰지만 본 시스템에선 반사경의 크기제한으로 적합하지않음.
-* 갈바노 미러의 최대 구경은 50mm 이고, 본시스템에선 너무 작아 beam leakage 를 초래함. 그래서 최소 표면적이 105x200 mm² 인 단일 대형 반사경을 모터에 달아서 사용.
-    > 💡 **Note:** 나의 경우에는 어차피 pan,tilt 모터에 카메라를 달고 그위에 레이저를 부착예정이라 참고만.
-
-### C. Control Method
-* B 방식으로 모터를 회전시켜 조절했을떄 모터들이 직렬로 연결되어있어 빔의 이동경로가 직선경로를 따르지 않는 문제가 생김.
-* M1, M2 모터를 조절했을때 이상적인 직선경로가 나오지 않고 곡선이 나오는데 정밀한 조정을 해야할때 문제가생김.
-* 결국 이걸 해결하기위해 빔스팟과, 수신기의 중심좌표를 모두 감지하는 Feedback Control System 을 구현. 시스템은 두 Rx 와 beam 위치의 픽셀 차를 피드백을 통하여 제어.
-    > 💡 **Note:** 본질적으로 pan,tilt 카메라를 사용했을때 휘는 이유를 이제 알았음. 카메라의 문제가 아닌 모터의 직렬 연결로 인한거였고, 결론적으로 본 논문은 둘다 인식해서 차이를 통해 제어. 나의 경우는 근데 지금 정확한 RX 의 위치를 모르는경우 -> RX의 위치를 정확하게 할려면 최소 2개의 filter 가 필요함.
+* **Tracking-by-detection:** 매 프레임마다 객체를 검출하고 이를 B-box(Bounding box)로 표현하는 MOT 문제를 해결하기 위한 경량화된 프레임워크 제시.
+* **온라인 추적:** 이전 프레임과 현재 프레임의 검출 정보만을 추적기에 제공하는 것이 목표.
+* **Data Association:** 비디오 시퀀스 전체에서 검출된 객체들을 연관시키는 문제로 접근.
+* **성능의 균형:** MOT 벤치마크 순위에서 발생하는 속도와 정확도의 Trade-off 관계를 극복하고 두 가지 모두 우수한 성능을 보임.
+* **오캄의 면도날:** 결과가 똑같다면 과정이 단순한 것이 좋다는 법칙에 따라 외형 특징(Appearance)은 제외하고, 바운딩 박스의 위치와 크기만 연관을 위해 사용.
+* **핵심 알고리즘:** 움직임 예측을 위한 **칼만 필터(Kalman Filter)**와 데이터 연관을 위한 **헝가리안 방법(Hungarian method)** 채택.
+* **검출기 성능 :** 검출기의 성능이 좋으면 추적 알고리즘이 단순해도 됨을 강조. Faster R-CNN 같은 고성능 CNN 검출기를 쓰고 알고리즘을 최적화함.
 
 ---
 
-## 4. 🎯 Detection and Prediction For Mobile Object
-
-### A. Detection for Spot And PV
-* Control Method 에서의 설명에서처럼 Beamspot 과 RX(PV)를 동시에 탐지하는것이 필수적임.
-* LED 가 IR 이기에 RGB 카메라와 IR 카메라가 통합된 Intel RealSense D435 사용.
-* Beamspot 은 IR(적외선)카메라를 사용하고 PV 패널은 RGB 카메라를 사용해 인식 서로 FOV(시야각) 이 다른데 출력 픽셀 범위를 조절해서 최대한 일치하도록 정렬시킴.
-* 객체인식은 YOLO 가 아닌 더작은 물체 탐지에 용이한 SSD(Single Shot MultiBox Detector) 알고리즘 사용.
-    > 💡 **Note:** 나의 경우는 어차피 YOLO 상위 버젼은 SSD 보다 우수하고, 반사필름을 사용하여 보다 인식률을 높이려 했기에...
-
-### B. Prediction For Mobile Object
-* 시스템 Latency 로 인하여 이미지 획득, 모터구동에 소요되는 시간이 발생.
-* 측정시 약 0.1초로 측정됨. 이로인해 빔이 RX 에 도달했을때 물체가 이동해 정렬이 어긋남.
-* LSTM 등 예측 알고리즘을 사용해봤으나 칼만필터가 최적의 알고리즘으로 선택됨.
-    > 💡 **Note:** 아직 정지상태의 Rx를 나는 가정기에 참고만.
-
-### C. Total System Design Including Prediction
-* Rx의 Conf Threshold 를 0.5에서 0.2로 낮춤.
-* 많은 잠재적 Rx 후보를 포착하게하고, BB의 면적이 너무크면 오인식이기에 버림.
-* 그중 가장 작은 BB를 RX로 설정. (멀리있는 타겟이 가장 작기에).
+## 3. 📚 Literature Review
+* 다중객체 추적은 과거 MHT(Multiple Hypothesis Tracking), JPDA(Joint Probabilistic Data Association) 필터를 사용하여 해결되어 왔음.
+* 하지만 객체 할당에 대한 불확실성이 높을 때 결정을 뒤로 미루는 방식은 객체 수가 기하급수적으로 증가할 때 실시간 응용에 부적합함.
+* **Geiger 등의 방법:** 헝가리안 알고리즘을 2단계 프로세스로 사용(프레임 간 연관으로 tracklets 형성 후 다시 연관). SORT 알고리즘은 이 방식의 추적 구성요소에서 영감을 받음.
 
 ---
 
-## 5. 🧪 Setup And Evaluation
-* 실제 실험에서 출력이 0.79W 로 측정. RX 의 크기가 커져야 거리가 멀어도 지속적으로 전력 공급 가능.
-* 드론에 RX 달아서 2m~5m 비행하도록 했을때 칼만필터로만 으로도 잘따라감.
+## 4. ⚙️ Methodology
+핵심 요소: 검출(Detection), 객체 상태를 다음 프레임으로의 전파(Propagating), 검출값과 기존 객체의 연관(Associating)
+
+### 4.1 Detection
+* **Faster R-CNN 프레임워크 사용:** 2단계로 구성된 End-to-End Framework.
+* 첫 번째 단계에서 특징을 추출하여 영역을 제안하고, 두 번째 단계에서 제안된 영역 내의 객체를 분류.
+* 출력 확률이 50%보다 큰 보행자 검출 결과만을 추적 프레임워크로 전달.
+
+### 4.2 Estimation Model
+* 각 타겟의 상태 모델링: $x = [u, v, s, r, \dot{u}, \dot{v}, \dot{s}]^T$
+    * $u, v$: B-box의 중심 좌표
+    * $s$: B-box의 넓이(Scale)
+    * $r$: 가로세로 비율(Aspect ratio)
+    * $\dot{u}, \dot{v}, \dot{s}$: 각 성분의 속도(Velocity)
+* 검출값이 타겟에 연관되면 칼만 필터를 통해 속도 성분을 최적으로 예측.
+* 연관된 검출값이 없는 경우 보정 없이 선형 속도 모델만을 사용하여 예측.
+
+### 4.3 Data Association
+* **IOU(Intersection-over-Union):** 두 박스가 얼마나 겹치는지를 나타내는 지표.
+* SORT는 많이 겹칠수록 같은 Object일 확률이 높다고 가정하여 헝가리안 알고리즘으로 최적의 일대일 매칭 수행.
+* $IOU_{min}$보다 낮은 값들은 매칭에서 제외.
+
+### 4.4 Creation and Deletion of Track Identities
+* 새로운 ID 생성 및 기존 ID 소멸 기준 설정.
+* $IOU_{min}$ 이하의 검출값은 새로운 객체로 간주하여 초기화(속도는 0으로 설정).
+* **수습 기간(Probationary period):** False Positives(노이즈) 방지를 위해 일정 기간 검출값과 연관되어야 함.
+* **$T_{Lost}$ 설정:** 프레임 동안 검출되지 않으면 종료. 본 논문 실험에서는 **1**로 지정.
+* **$T_{lost}$가 1인이유 :** 1. 등속도 모델은 실제 역학을 예측하기에 부족함. 2. 객체 재식별(Re-ID)은 본 연구의 범위 밖임.
 
 ---
 
-## 6. 🧐 Review
+## 5. 🧪 Experiments
+### 5.1 Metrics
+* MOTA(정확도), MOTP(정밀도), MT, ML, ID sw, Frag 사용.
+* MOTA ~ MT까지는 높을수록 좋고, 나머지는 낮을수록 좋음.
 
-### 내 연구와의 비교
+### 5.2 Performance Evaluation
+* 당시 사용됐던 Online Trackers 중 가장 높은 정확도(MOTA) 및 가장 낮은 ML(Most Lost) 달성.
 
-| Feature | My Project (Proposed) | This Paper |
-| :--- | :--- | :--- |
-| **Transmitter** | **Laser** (High directionality) | **IR LED** (Eye-safety focus) |
-| **Receiver** | **Solar Cell + Retro-reflector** | **GaAs Solar Cell** |
-| **Target State** | **Stationary** (Fixed position) | **Dynamic** (Moving drone) |
-| **Control** | **Pan-Tilt Servo Motors** | **Lens + 2-Axis Stepping Motors** |
-| **Vision Model** | **YOLOv11** (Superior to SSD) | **SSD** |
-
-### 내 연구에 적용하는 방안
-결국 나는 정적이기에 예측부분은 제외하고(칼만필터) 결국 두 오차로 계산하는것이 핵심인데:
-1. 고휘도 반사필름을 위아래로 같은 거리차로 붙이면 두개를 인식하여 두 좌표의 평균 값으로 Rx 의 픽셀을 구할수 있음.
-2. 그러면 최초 위치 추정 단계 에서 대략적인 pan, tilt 추정 값을 구함.
-3. 추가보정단계에서 2개를 인식해서 중앙값인 Rx 의 좌표를 구한 후 레이저를 켬.
-4. 마찬가지로 레이저의 Beam Spot 을 인식하여 두개의 좌표 차이만큼 Pan tilt 를 움직여 두 좌표의 차이를 0으로 만드는 pan, tilt 값을 추가로 구하는 방안으로 적용가능.
+### 5.3 Runtime
+* Intel i7 2.5GHz 기기에서 **260Hz**로 실행되어 압도적인 속도 증명.
 
 ---
 
-## 7. 📝 New Knowledge & Terms
-* **GaAs Solar Cell:** 갈륨비소 태양전지. 일반 실리콘보다 효율이 높고 특히 850nm 대역 반응성이 좋음.
-* **Galvano Mirror:** 고속 정밀 제어가 가능하나 구경이 작아 고출력/대구경 빔 조향에는 한계가 있음.
-* **SSD (Single Shot MultiBox Detector):** 1-stage 객체 인식 알고리즘. (현재는 YOLO 시리즈가 더 우세함)
+## 6. 🧐 Conclusion
+* 추적 품질이 검출 성능에 크게 의존함을 입증.
+* 단순한 알고리즘(Kalman + Hungarian)만으로도 SOTA급 추적 품질을 달성할 수 있음을 보여줌.
+* 다만, 장기 폐색(Occlusion)을 처리하기 위한 객체 재식별 문제가 남아있음.
+
+---
+
+## 7. 📝 Review
+
+### 내 연구와의 비교 및 적용 방안
+* **한계점:** 내 연구에서는 15°씩 Pan-tilt를 하나의 축에 있는 모터로 조절하기에 칼만 필터나 단순 선형 모델로 예측이 불가능함(추가적인 미세보정이 필요함).
+* **적용 방안:** 결국 이전 상태를 보고 비교하거나 예측을 잘하는 것이 핵심인데, 높은 수준의 예측 모델을 직접 만들기보다는 **데이터 연관(Data Association)**을 강화하는 방향이 현실적임.
+* **다음 단계:** 본 논문에서 비교 및 참고했던 **Geiger 등의 방법**을 읽어보고, 끊어진 궤적(tracklets)을 다시 연결하는 로직을 분석해볼 필요가 있음.
+
+---
+
+## 8. 💡 New Knowledge & Terms
+* **오캄의 면도날(Occam's Razor):** 어떤 사실에 대한 설명들 중 동일한 조건이라면 가장 단순한 것이 정답일 확률이 높다는 원칙.
