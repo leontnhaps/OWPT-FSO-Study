@@ -23,3 +23,4 @@ OWPT 와 FSO 의 다양한 연구 방식 이해
 
 ### 💻 Computer Vision
 - [O] [2026-01-01] SIMPLE ONLINE AND REALTIME TRACKING (2016 IEEE International Conference on Image Processing (ICIP), 2016)
+- [] [] 3D Traffic Scene Understanding From Movable Platforms (IEEE Transactions on Pattern Analysis and Machine Intelligence, 2014)
