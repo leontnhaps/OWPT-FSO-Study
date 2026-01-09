@@ -23,4 +23,5 @@ OWPT 와 FSO 의 다양한 연구 방식 이해
 - [] [] Visual servo control, Part 1 Basic approaches (IEEE Robotics & Automation Magazine)
 
 ### 💻 Computer Vision
-- [] [] Simple Online and Realtime Tracking with a Deep Association Metric (2016 IEEE International Conference on Image Processing (ICIP), 2016)
+- [O] [2026-01-01] SIMPLE ONLINE AND REALTIME TRACKING (2016 IEEE International Conference on Image Processing (ICIP), 2016)
+- [] [] 3D Traffic Scene Understanding From Movable Platforms (IEEE Transactions on Pattern Analysis and Machine Intelligence, 2014)
