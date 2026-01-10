@@ -14,6 +14,7 @@ OWPT 와 FSO 의 다양한 연구 방식 이해
 ## 🗂 Categories
 
 ### ⚡ Optical Wireless Power Transmission (OWPT)
+- [O] [2026-01-10] A comprehensive review of optical wireless power transfer technology (IEEE Access, 2025)
 - [O] [2025-01-09] 0.8W Class Optical Wireless Power Transmission via LED Beam for Supplying Arduino-based IoT Sensor (OECC, 2024)
 - [O] [2025-11-22] LED-Based Optical Wireless Power Transmission for Automatic Tracking and Powering Mobile Object in Real Time (IEEE Access, 2025)
 
