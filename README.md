@@ -20,6 +20,7 @@ OWPT 와 FSO 의 다양한 연구 방식 이해
 - [] [] Indoor Optical Wireless Power Transfer to Small Cells at Nighttime (Journal of Lightwave Technology, 2016)
 
 ### 👁️ Free Space Optical
+- [] [] Indoor Optical Wireless Power Transfer to Small Cells at Nighttime (Journal of Lightwave Technology, 2016)
 
 ### 🤖 Visual Servoing
 - [] [] Visual servo control, Part 1 Basic approaches (IEEE Robotics & Automation Magazine)
