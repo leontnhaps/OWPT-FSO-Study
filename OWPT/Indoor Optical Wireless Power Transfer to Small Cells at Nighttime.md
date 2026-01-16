@@ -167,7 +167,7 @@
 - **단결정(Mono-c-Si)**에서는 예상과 다르게 폭발적인 상승은 없었음.
 
 #### 4-D-5) IPTS와 비교
-- (별도 내용 없음, 비교 분석 수행됨)
+- (별도 내용 없음)
 
 #### 4-D-6) Experiment 2 - Objective, Method, Setup, Applied Analytical Model and Results
 - **Thorlabs S121B Si**를 통해 LD의 효율값 측정 (LD 제품 편차 확인 목적).
@@ -209,25 +209,30 @@
     - 통신 Branch: **AC** 신호 수신.
     - 각각 인덕터와 커패시터를 포함하여 분리.
 
-## 5. Study 2 : Laser Beam Collimation
-- (내용 없음)
+## 5~6. Study 2 & 3
+- (관심 분야 아님 - 렌즈 시준 및 시뮬레이션 내용이므로 생략)
+
+## 7. Conclusion
+- RF나 LED 방식은 효율이 낮았으나, 설계한 **다중 레이저 시스템(42개 LDs)** 시뮬레이션 결과, **30m 거리**의 기지국에 **7.2W** 전송 가능함을 보임 (야간).
+- **Mismatch Loss** 문제는 빔을 여러 개 나누어 조사함으로써 해결.
 
 ---
 
-### 🧐 ?-1. Review
-- **Study 1**: 잘 모델링하면 내 연구에서도 모델링이 가능할 듯함.
-    - 현재 렌즈 사용 여부가 미정이지만(현재 미사용), 모델링을 통해 예측 가능할 것으로 보임.
-- **문제점 발견**: 내 연구에서 사용하는 레이저가 너무 큰 편인데, **4-D-3)** 결과를 보면 '낮은 효율의 셀이 전체 전력을 지배한다(Mismatch Loss)'는 내용이 있어 이 부분도 잠재적 문제로 파악됨.
+### 🧐 8. Review
+- **Study 1 모델링**: 내 연구에서도 충분히 적용 및 모델링 가능할 것으로 보임.
+    - 현재 렌즈 사용 여부가 미정(현재 미사용)이나, 모델링을 통해 성능 예측이 가능할 듯함.
+- **문제점 식별**: 현재 연구에서 사용하는 레이저가 타겟에 비해 너무 큰 편인데, **4-D-3)**의 결과(낮은 효율의 셀이 전체 전력을 제한하는 Mismatch Loss)를 고려할 때 이 부분이 성능 저하의 원인이 될 수 있음.
+- **난관**: **Mismatch Loss**가 상당히 중요한 요소로 다뤄지는데, 전체 시스템에서 빔이 셀을 완벽하게 덮도록(Covering) 만드는 것이 핵심 과제이나 구체적인 해결 방안이 막막함.
 
-### 💡 ?. New Knowledge & Terms
+### 💡 9. New Knowledge & Terms
 - **Fill Factor (FF)**: 태양전지 특성 평가 파라미터, 최대 전력점을 (개방단 전압 $\times$ 단락전류)로 나눈 값.
 - **Backhaul Communication**: 계층적 통신망에서 Edge networks를 Core networks나 Internet에 연결하는 역할. 셀룰러 네트워크에선 무선접속망(RAN)과 핵심망(CN) 간 연결을 백홀이라 부름.
-- **Rectenna**: Antenna와 Rectifier(정류기)를 결합한 장치. 주변 전자기파를 수신해 직류 전기로 변환.
-- **Maximum Ratio Combining (MRC)**: 여러 안테나로 수신된 신호들에 신호 품질에 비례한 가중치를 두어 결합, 신호 품질을 최대화하는 수신 다이버시티 기술.
+- **Rectenna**: Antenna와 Rectifier(정류기)를 결합한 장치. 주변 전자기파를 수신해 직류 전기로 변환하는 기술.
+- **Maximum Ratio Combining (MRC)**: 여러 안테나로 수신된 신호들에 신호 품질에 비례한 가중치를 적용해 결합, 전체 신호 품질을 최대화하는 수신 다이버시티 기술.
 - **Multi-Quantum Well (MQW)**: LED나 LD의 핵심 기술. 밴드갭이 작은 얇은 활성층과 큰 절연층을 교대로 적층하여 강한 빛을 효율적으로 방출.
 - **Paraxial Approximation (근축 근사)**: $\sin(\theta) \approx \theta$ (rad)와 같이 근사화하여 계산하는 방식.
 - **Complex Beam Parameter**: 광학에서 곡률과 굵기 두 물리량을 계산하는 파라미터 $q$.
-- **ABCD Matrix**: 입출력을 연관 짓는 행렬. $[r_{out}, \theta_{out}]^T = [A, B; C, D] [r_{in}, \theta_{in}]^T$. ($A$: 배율, $B$: 유효거리, $C$: 굴절능, $D$: 각도배율).
+- **ABCD Matrix**: 광학 시스템 입출력을 연관 짓는 행렬. $[r_{out}, \theta_{out}]^T = [A, B; C, D] [r_{in}, \theta_{in}]^T$. ($A$: 배율, $B$: 유효거리, $C$: 굴절능, $D$: 각도배율).
 - **Shockley Diode Equation**: 다이오드에 흐르는 전류와 양단 전압의 관계를 설명하는 공식.
 - **Thorlabs S121B Si**: 400nm~1100nm 파장 범위의 광출력을 측정하는 Si PD.
 - **OFDM**: 고속 데이터 스트림을 여러 느린 부반송파로 나누어 직교성을 유지하며 병렬 전송하는 디지털 통신 기술.
